@@ -269,7 +269,7 @@
                 
                 $("#articles").html(""); // Clear previous content
 
-                data.slice(0, 56).forEach(article => { // Limit to 5 articles
+                data.slice(0, 35).forEach(article => { // Limit to 5 articles
                     let coverImage = article.cover_image 
                         ? article.cover_image 
                         : "https://media2.dev.to/dynamic/image/width=1000,height=420,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Fi7uzu7m51rl9yhs2yryr.png"; 
