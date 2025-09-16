@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AquaScript Blogs | Ultra Advanced Black & White Theme</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Google Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    
+    <!-- Bulma CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    
+    <!-- LenisJS -->
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js"></script>
+    
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollToPlugin.min.js"></script>
+    
+    <!-- AnimeJS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    
+    <!-- ThreeJS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    
+    <!-- ParticlesJS -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    
+    <!-- VelocityJS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/2.0.6/velocity.min.js"></script>
+    
+    <!-- MoJS -->
+    <script src="https://cdn.jsdelivr.net/npm/@mojs/core"></script>
+    
+    <!-- BarbaJS -->
+    <script src="https://unpkg.com/@barba/core"></script>
+    
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    <style>
+        :root {
+            --primary-black: #0a0a0a;
+            --secondary-black: #1a1a1a;
+            --primary-white: #ffffff;
+            --secondary-white: #f8f8f8;
+            --accent-gray: #888888;
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, var(--primary-black) 0%, var(--secondary-black) 100%);
+            color: var(--primary-white);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+        }
+        
+        /* Glassmorphism effects */
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Navigation */
+        .navbar {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--glass-border);
+            padding: 1rem 2rem;
+        }
+        
+        .navbar-brand {
+            font-family: 'Playfair Display', serif;
+            font-weight: 900;
+            font-size: 1.8rem;
+        }
+        
+        .navbar-menu {
+            background: transparent !important;
+        }
+        
+        .navbar-item {
+            color: var(--primary-white);
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .navbar-item:hover {
+            color: var(--accent-gray);
+            background: transparent !important;
+        }
+        
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-content {
+            z-index: 2;
+            position: relative;
+        }
+        
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            color: var(--secondary-white);
+        }
+        
+        /* ThreeJS Canvas */
+        #three-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+        
+        /* Particles Container */
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+        
+        /* Blog Cards */
+        .blog-section {
+            padding: 6rem 0;
+        }
+        
+        .blog-card {
+            height: 100%;
+            transition: transform 0.3s ease;
+            overflow: hidden;
+        }
+        
+        .blog-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .blog-card .card-image {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .blog-card .card-image img {
+            object-fit: cover;
+            height: 100%;
+            width: 100%;
+            transition: transform 0.5s ease;
+        }
+        
+        .blog-card:hover .card-image img {
+            transform: scale(1.1);
+        }
+        
+        .card-content {
+            padding: 1.5rem;
+        }
+        
+        .card-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--secondary-black);
+            padding: 4rem 1.5rem;
+            border-top: 1px solid var(--glass-border);
+        }
+        
+        /* Responsive Design */
+        @media screen and (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .navbar-menu {
+                background: var(--primary-black) !important;
+            }
+        }
+        
+        /* Animation Classes */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: var(--secondary-black);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent-gray);
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary-white);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="#">
+                <span class="has-text-white">AquaScript</span>
+            </a>
+            
+            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+        
+        <div id="navbarBasicExample" class="navbar-menu">
+            <div class="navbar-start">
+                <a class="navbar-item" href="#home">Home</a>
+                <a class="navbar-item" href="#blogs">Blogs</a>
+                <a class="navbar-item" href="#about">About</a>
+                <a class="navbar-item" href="#contact">Contact</a>
+            </div>
+            
+            <div class="navbar-end">
+                <div class="navbar-item">
+                    <div class="buttons">
+                        <a class="button is-white is-outlined">
+                            <strong>Sign up</strong>
+                        </a>
+                        <a class="button is-light">
+                            Log in
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div id="particles-js"></div>
+        <div id="three-canvas"></div>
+        
+        <div class="container hero-content">
+            <div class="columns is-vcentered">
+                <div class="column is-half">
+                    <h1 class="hero-title">AquaScript <span class="has-text-white">Blogs</span></h1>
+                    <p class="hero-subtitle">Where ideas flow like water and thoughts crystallize into words</p>
+                    <div class="buttons">
+                        <button class="button is-white is-medium">Explore Blogs</button>
+                        <button class="button is-outlined is-white is-medium">Learn More</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Featured Blogs -->
+    <section class="blog-section" id="blogs">
+        <div class="container">
+            <h2 class="title is-2 has-text-centered has-text-white mb-6">Featured Articles</h2>
+            
+            <div class="columns is-multiline">
+                <!-- Blog Card 1 -->
+                <div class="column is-4">
+                    <div class="glass-card blog-card">
+                        <div class="card-image">
+                            <figure class="image is-4by3">
+                                <img src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Blog Image">
+                            </figure>
+                        </div>
+                        <div class="card-content">
+                            <h3 class="title is-4 has-text-white">The Future of Web Development</h3>
+                            <p class="has-text-white">Exploring the latest trends and technologies that are shaping the future of web development.</p>
+                            <div class="mt-4">
+                                <span class="tag is-white">Technology</span>
+                                <span class="tag is-light">Web Dev</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Blog Card 2 -->
+                <div class="column is-4">
+                    <div class="glass-card blog-card">
+                        <div class="card-image">
+                            <figure class="image is-4by3">
+                                <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Blog Image">
+                            </figure>
+                        </div>
+                        <div class="card-content">
+                            <h3 class="title is-4 has-text-white">Designing for Accessibility</h3>
+                            <p class="has-text-white">How to create inclusive digital experiences that everyone can use and enjoy.</p>
+                            <div class="mt-4">
+                                <span class="tag is-white">Design</span>
+                                <span class="tag is-light">Accessibility</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Blog Card 3 -->
+                <div class="column is-4">
+                    <div class="glass-card blog-card">
+                        <div class="card-image">
+                            <figure class="image is-4by3">
+                                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Blog Image">
+                            </figure>
+                        </div>
+                        <div class="card-content">
+                            <h3 class="title is-4 has-text-white">Data Visualization Techniques</h3>
+                            <p class="has-text-white">Modern approaches to transforming complex data into understandable visual representations.</p>
+                            <div class="mt-4">
+                                <span class="tag is-white">Data</span>
+                                <span class="tag is-light">Visualization</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="has-text-centered mt-6">
+                <button class="button is-white is-outlined is-large">View All Articles</button>
+            </div>
+        </div>
+    </section>
+    
+    <!-- About Section -->
+    <section class="section py-6" id="about">
+        <div class="container">
+            <div class="columns is-vcentered">
+                <div class="column is-6">
+                    <h2 class="title is-2 has-text-white mb-4">About AquaScript</h2>
+                    <p class="is-size-5 has-text-white">AquaScript is a premium blogging platform focused on technology, design, and innovation. We believe in the power of words to inspire change and drive progress.</p>
+                    <p class="is-size-5 has-text-white mt-4">Our team of expert writers and contributors share their knowledge and insights to help you stay ahead in the rapidly evolving digital landscape.</p>
+                    <div class="mt-5">
+                        <button class="button is-white">Learn More About Us</button>
+                    </div>
+                </div>
+                <div class="column is-6">
+                    <div class="glass-card p-5">
+                        <div id="mojs-shape" style="height: 300px; display: flex; align-items: center; justify-content: center;">
+                            <!-- Mo.js animation will be rendered here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="columns">
+                <div class="column">
+                    <h3 class="title is-4 has-text-white">AquaScript</h3>
+                    <p class="has-text-white">Premium content for modern readers.</p>
+                </div>
+                <div class="column">
+                    <h4 class="title is-5 has-text-white">Explore</h4>
+                    <ul>
+                        <li><a class="has-text-white" href="#home">Home</a></li>
+                        <li><a class="has-text-white" href="#blogs">Blogs</a></li>
+                        <li><a class="has-text-white" href="#about">About</a></li>
+                        <li><a class="has-text-white" href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="column">
+                    <h4 class="title is-5 has-text-white">Categories</h4>
+                    <ul>
+                        <li><a class="has-text-white" href="#">Technology</a></li>
+                        <li><a class="has-text-white" href="#">Design</a></li>
+                        <li><a class="has-text-white" href="#">Development</a></li>
+                        <li><a class="has-text-white" href="#">Innovation</a></li>
+                    </ul>
+                </div>
+                <div class="column">
+                    <h4 class="title is-5 has-text-white">Connect</h4>
+                    <div class="field is-grouped">
+                        <p class="control">
+                            <a class="button is-white is-outlined">
+                                <span class="icon">
+                                    <i class="fab fa-twitter"></i>
+                                </span>
+                            </a>
+                        </p>
+                        <p class="control">
+                            <a class="button is-white is-outlined">
+                                <span class="icon">
+                                    <i class="fab fa-facebook"></i>
+                                </span>
+                            </a>
+                        </p>
+                        <p class="control">
+                            <a class="button is-white is-outlined">
+                                <span class="icon">
+                                    <i class="fab fa-instagram"></i>
+                                </span>
+                            </a>
+                        </p>
+                        <p class="control">
+                            <a class="button is-white is-outlined">
+                                <span class="icon">
+                                    <i class="fab fa-linkedin"></i>
+                                </span>
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="content has-text-centered has-text-white">
+                <p>&copy; 2023 AquaScript Blogs. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // Initialize Lenis for smooth scrolling
+        const lenis = new Lenis({
+            duration: 1.2,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            direction: 'vertical',
+            gestureDirection: 'vertical',
+            smooth: true,
+            mouseMultiplier: 1,
+            touchMultiplier: 2,
+            infinite: false,
+        });
+        
+        function raf(time) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+        }
+        
+        requestAnimationFrame(raf);
+        
+        // Initialize Particles.js
+        particlesJS('particles-js', {
+            particles: {
+                number: { value: 80, density: { enable: true, value_area: 800 } },
+                color: { value: "#ffffff" },
+                shape: { type: "circle" },
+                opacity: { value: 0.5, random: true },
+                size: { value: 3, random: true },
+                line_linked: {
+                    enable: true,
+                    distance: 150,
+                    color: "#ffffff",
+                    opacity: 0.4,
+                    width: 1
+                },
+                move: {
+                    enable: true,
+                    speed: 2,
+                    direction: "none",
+                    random: true,
+                    straight: false,
+                    out_mode: "out",
+                    bounce: false
+                }
+            },
+            interactivity: {
+                detect_on: "canvas",
+                events: {
+                    onhover: { enable: true, mode: "grab" },
+                    onclick: { enable: true, mode: "push" },
+                    resize: true
+                }
+            },
+            retina_detect: true
+        });
+        
+        // Initialize Three.js
+        function initThreeJS() {
+            const canvas = document.getElementById('three-canvas');
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer({ canvas, alpha: true });
+            
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            
+            // Create geometric objects
+            const geometry = new THREE.IcosahedronGeometry(2, 0);
+            const material = new THREE.MeshPhongMaterial({ 
+                color: 0xffffff, 
+                shininess: 100,
+                wireframe: true
+            });
+            
+            const mesh = new THREE.Mesh(geometry, material);
+            scene.add(mesh);
+            
+            // Add lights
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+            scene.add(ambientLight);
+            
+            const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+            directionalLight.position.set(5, 5, 5);
+            scene.add(directionalLight);
+            
+            camera.position.z = 5;
+            
+            // Animation
+            function animate() {
+                requestAnimationFrame(animate);
+                
+                mesh.rotation.x += 0.005;
+                mesh.rotation.y += 0.01;
+                
+                renderer.render(scene, camera);
+            }
+            
+            animate();
+            
+            // Handle window resize
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            });
+        }
+        
+        // Initialize Mo.js animation
+        function initMojs() {
+            const mojsContainer = document.getElementById('mojs-shape');
+            
+            const circle = new mojs.Shape({
+                parent: mojsContainer,
+                shape: 'circle',
+                fill: 'none',
+                stroke: '#ffffff',
+                strokeWidth: { 10 : 0 },
+                radius: { 0 : 50 },
+                duration: 1000,
+                repeat: 999,
+                easing: 'sin.inOut',
+                isShowStart: true
+            });
+            
+            const burst = new mojs.Burst({
+                parent: mojsContainer,
+                radius: { 0 : 100 },
+                count: 5,
+                angle: { 0 : 360 },
+                children: {
+                    shape: 'polygon',
+                    points: 5,
+                    fill: 'none',
+                    stroke: '#ffffff',
+                    strokeWidth: { 10 : 0 },
+                    radius: { 30 : 5 },
+                    duration: 1000,
+                    easing: 'sin.out'
+                }
+            });
+            
+            circle.play();
+            burst.replay();
+        }
+        
+        // Initialize GSAP animations
+        function initGSAP() {
+            // Animate hero content
+            gsap.from('.hero-title', {
+                duration: 1.5,
+                y: 50,
+                opacity: 0,
+                ease: 'power3.out'
+            });
+            
+            gsap.from('.hero-subtitle', {
+                duration: 1.5,
+                y: 50,
+                opacity: 0,
+                delay: 0.3,
+                ease: 'power3.out'
+            });
+            
+            gsap.from('.hero .buttons', {
+                duration: 1.5,
+                y: 50,
+                opacity: 0,
+                delay: 0.6,
+                ease: 'power3.out'
+            });
+            
+            // Animate blog cards on scroll
+            gsap.utils.toArray('.blog-card').forEach(card => {
+                gsap.from(card, {
+                    scrollTrigger: {
+                        trigger: card,
+                        start: 'top 80%',
+                        toggleActions: 'play none none none'
+                    },
+                    duration: 1,
+                    y: 50,
+                    opacity: 0,
+                    ease: 'power3.out'
+                });
+            });
+        }
+        
+        // Initialize Barba.js for page transitions
+        barba.init({
+            transitions: [{
+                name: 'default',
+                leave(data) {
+                    return gsap.to(data.current.container, {
+                        opacity: 0,
+                        duration: 0.5
+                    });
+                },
+                enter(data) {
+                    return gsap.from(data.next.container, {
+                        opacity: 0,
+                        duration: 0.5
+                    });
+                }
+            }]
+        });
+        
+        // Initialize navbar burger menu
+        document.addEventListener('DOMContentLoaded', () => {
+            const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+            
+            if ($navbarBurgers.length > 0) {
+                $navbarBurgers.forEach( el => {
+                    el.addEventListener('click', () => {
+                        const target = el.dataset.target;
+                        const $target = document.getElementById(target);
+                        
+                        el.classList.toggle('is-active');
+                        $target.classList.toggle('is-active');
+                    });
+                });
+            }
+        });
+        
+        // Initialize scroll animations
+        function initScrollAnimations() {
+            const fadeElems = document.querySelectorAll('.fade-in');
+            
+            const fadeObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            fadeElems.forEach(elem => {
+                fadeObserver.observe(elem);
+            });
+        }
+        
+        // Initialize everything when the document is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            initThreeJS();
+            initMojs();
+            initGSAP();
+            initScrollAnimations();
+        });
+    </script>
+    
+    <!-- Font Awesome for social icons -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</body>
+</html>
