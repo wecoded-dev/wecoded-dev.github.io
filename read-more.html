@@ -230,11 +230,23 @@
         
         <div class="blog-grid" id="blogContainer">
             <!-- Blog cards will be generated here -->
+            <div class="card-img">
+                        <img src="https://journal.ahima.org/page/federal-cybersecurity-efforts-seek-to-improve-protection-of-health-data/" alt="cybersecurity">
+                    </div>
+                    <div class="card-content">
+                        <span class="card-tag">cybersecurity </span>
+                        <h3 class="card-title"> New Cybersecurity War </h3>
+                        <p class="card-excerpt"> New cybersecurity War Begins</p>
+                        <div class="card-footer">
+                            <a href="new-cyber-security-war.html" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                            <span class="card-date">21 Sep, 2025</span>
+                        </div>
+                    </div>
         </div>
     </div>
     
     <div class="footer">
-        <p>© 2023 Debugging The Machine | Technology Blog</p>
+        <p>© 2025 AquaScript Blogs| Technology Blog</p>
     </div>
 
     <!-- jQuery and Bootstrap JS -->
@@ -280,92 +292,9 @@
             });
         });
         
-        // Blog data
-        const blogPosts = [
-            {
-                title: "Why Developers Still Don't Trust AI-Generated Code",
-                excerpt: "Exploring the skepticism around AI code generation tools and the challenges they face in gaining developer confidence.",
-                tag: "Web Dev",
-                date: "Sept 20, 2023",
-                image: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80",
-                link: "#"
-            },
-            {
-                title: "The Future of Web Development in an AI-Driven World",
-                excerpt: "How artificial intelligence is reshaping the landscape of web development and what it means for developers.",
-                tag: "AI",
-                date: "Sept 18, 2023",
-                image: "https://images.unsplash.com/photo-1534723328310-e82dad3ee43f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1752&q=80",
-                link: "#"
-            },
-            {
-                title: "Debugging Complex Systems: Strategies for Success",
-                excerpt: "Effective techniques for identifying and resolving issues in large-scale, complex software systems.",
-                tag: "Debugging",
-                date: "Sept 15, 2023",
-                image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1750&q=80",
-                link: "#"
-            },
-            {
-                title: "Machine Learning in Frontend Development",
-                excerpt: "How ML technologies are being integrated into frontend tools and workflows to enhance developer productivity.",
-                tag: "Machine Learning",
-                date: "Sept 12, 2023",
-                image: "https://images.unsplash.com/photo-1504639725590-34d0984388bd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80",
-                link: "#"
-            },
-            {
-                title: "The Psychology of Trust in Software Development",
-                excerpt: "Understanding how trust forms between developers and the tools they use in their daily work.",
-                tag: "Psychology",
-                date: "Sept 10, 2023",
-                image: "https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80",
-                link: "#"
-            },
-            {
-                title: "Ethical Considerations in AI-Assisted Coding",
-                excerpt: "Examining the ethical implications of using AI to generate code and potential impacts on the developer community.",
-                tag: "Ethics",
-                date: "Sept 8, 2023",
-                image: "https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1738&q=80",
-                link: "#"
-            }
-        ];
-        
+
         // Generate blog cards
-        function generateBlogCards() {
-            const blogContainer = document.getElementById('blogContainer');
-            
-            blogPosts.forEach((post, index) => {
-                const card = document.createElement('div');
-                card.className = 'blog-card';
-                card.style.animationDelay = `${0.3 + index * 0.1}s`;
-                
-                card.innerHTML = `
-                    <div class="card-img">
-                        <img src="${post.image}" alt="${post.title}">
-                    </div>
-                    <div class="card-content">
-                        <span class="card-tag">${post.tag}</span>
-                        <h3 class="card-title">${post.title}</h3>
-                        <p class="card-excerpt">${post.excerpt}</p>
-                        <div class="card-footer">
-                            <a href="${post.link}" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
-                            <span class="card-date">${post.date}</span>
-                        </div>
-                    </div>
-                `;
-                
-                blogContainer.appendChild(card);
-                
-                // Animate cards on scroll
-                setTimeout(() => {
-                    card.style.opacity = '1';
-                    card.style.transform = 'translateY(0)';
-                }, 300 + index * 100);
-            });
-        }
-        
+
         // Initialize on page load
         $(document).ready(function() {
             generateBlogCards();
